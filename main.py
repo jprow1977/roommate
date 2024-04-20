@@ -71,11 +71,20 @@ class PdfReport:
         webbrowser.open(self.filename)
 
 
-the_bill = Bill(amount=120, period="April 2024")
-john = Flatmate(name='John', days_in_house=20)
-mary = Flatmate(name='Mary', days_in_house=25)
-print("John pays: ", john.pays(bill=the_bill, flatmate2=mary))
-print("Mary pays: ", mary.pays(bill=the_bill, flatmate2=john))
+bill_amount = float(input("Enter bill amount: "))
+month = input("Enter Bill Period(e.g. April 2024): ")
+
+roommate1_name= input("Enter first roommate name: ")
+days1 = float(input(f"{roommate1_name}'s days in house: "))
+
+roommate2_name = input("Enter second roommate name: ")
+days2 = float(input(f"{roommate2_name}'s days in house: "))
+
+the_bill = Bill(amount=bill_amount, period=month)
+roommate1 = Flatmate(name=roommate1_name, days_in_house=days1)
+roommate2 = Flatmate(name=roommate2_name, days_in_house=days2)
+print(f"{roommate1_name} pays: ", roommate1.pays(bill=the_bill, flatmate2=roommate2))
+print(f"{roommate2_name} pays: ", roommate2.pays(bill=the_bill, flatmate2=roommate1))
 
 pdf_report = PdfReport(filename='Roommate_bill.pdf')
-pdf_report.generate(flatmate1=john, flatmate2=mary, bill=the_bill)
+pdf_report.generate(flatmate1=roommate1, flatmate2=roommate2, bill=the_bill)
